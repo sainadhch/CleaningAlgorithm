@@ -55,6 +55,8 @@
     multiply by the ‘dirty_pod_factor’ setting of 0.9. Car 7 has Class 3, so we multiply by that Class’s
     factor of 1.5. Our calculated frequency is 14 * 0.9 * 1.5 = 18.9. This rounds to 19 days between
     cleans. The last clean was 5 days ago, so the next clean is due in 19 ­ 5 days, ie. 14 days.
+    
+    Online Execution Link: https://www.jdoodle.com/a/beK
 
 # PHPUnit Testing
    PHPUnit testing file 'CleaningAlgorithmTest.php'
