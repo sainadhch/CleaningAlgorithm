@@ -2,26 +2,13 @@
 include 'CleaningAlgorithm.php';
 class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
 {
-    /* public function testSimple1()
-    {
-        $car = [1,2,3,rand(1,99)];
-        $pods = [2=>true];
-        $classes = [3=>0.2];
-        $settings = [1.4,10,rand(10,30),30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
-    } */
-    
     // Tests for clean which doesn't fall today
     public function testNotTodayLastCleanGreaterThanStdCleanWithPods()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>true];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -30,10 +17,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanGreaterThanStdCleanWithPodsFalse()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>false];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -42,10 +29,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanGreaterThanStdCleanWithNullPods()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -54,10 +41,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanGreaterThanStdCleanWithNullClasses()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>true];
         $classes = [];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -67,10 +54,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     
     public function testNotTodayLastCleanLessThanStdCleanWithPods()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>true];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -79,10 +66,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanLessThanStdCleanWithPodsFalse()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>false];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -91,10 +78,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanLessThanStdCleanWithNullPods()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -103,10 +90,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testNotTodayLastCleanLessThanStdCleanWithNullClasses()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>true];
         $classes = [];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -118,10 +105,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     // Tests for clean which fall today
     public function testForTodayLastCleanGreaterThanStdCleanWithPods()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>true];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -130,10 +117,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanGreaterThanStdCleanWithPodsFalse()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>false];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -142,10 +129,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanGreaterThanStdCleanWithNullPods()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -154,10 +141,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanGreaterThanStdCleanWithNullClasses()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
         $pods = [2=>true];
         $classes = [];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -167,10 +154,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     
     public function testForTodayLastCleanLessThanStdCleanWithPods()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>true];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -179,10 +166,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanLessThanStdCleanWithPodsFalse()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>false];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -191,10 +178,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanLessThanStdCleanWithNullPods()
     {
-        $car = [1,2,3,20];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [];
         $classes = [3=>0.2];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
@@ -203,10 +190,10 @@ class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
     }
     public function testForTodayLastCleanLessThanStdCleanWithNullClasses()
     {
-        $car = [1,2,3,25];
+        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
         $pods = [2=>true];
         $classes = [];
-        $settings = [1.4,10,24,30];
+        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);

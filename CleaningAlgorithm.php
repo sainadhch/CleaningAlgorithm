@@ -17,17 +17,19 @@ class CleaningAlgorithm
      * $classes = ['class_id'=>(double)]; class_id => double values
      * $settings = ['dirty_pod','min_freq','std_freq','max_freq']; double, int, int, int respectively
      */
-    public function calculateNextClean($car, $pods = false, $classes, $settings)
+    public function calculateNextClean($car, $pods, $classes, $settings)
     {
-        $carPodId = $car[1];
-        $carClassId = $car[2];
-        $carLastCleaned = $car[3];
-        $carDirtyPod = $settings[0];
-        $carMinCleanFreq = $settings[1];
-        $carStdCleanFreq = $settings[2];
-        $carMaxCleanFreq = $settings[3];
+        $carPodId = $car['pod_id'];
+        $carClassId = $car['class_id'];
+        $carLastCleaned = $car['last_clean'];
+        $carDirtyPod = $settings['dirty_pod'];
+        $carMinCleanFreq = $settings['min_freq'];
+        $carStdCleanFreq = $settings['std_freq'];
+        $carMaxCleanFreq = $settings['max_freq'];
         
         $isCarHasClassFactor = (isset($classes[$carClassId])?$classes[$carClassId]:1.0);
+        $carLastCleaned = $carLastCleaned * $isCarHasClassFactor;
+
         $isCarHasPod = (isset($pods[$carPodId])?$pods[$carPodId]:false);
         if($isCarHasPod)
             $carLastCleaned = $carLastCleaned * $carDirtyPod;
