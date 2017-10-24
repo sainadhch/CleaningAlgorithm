@@ -27,17 +27,30 @@ class CleaningAlgorithm
         $carStdCleanFreq = $settings['std_freq'];
         $carMaxCleanFreq = $settings['max_freq'];
         
-        $isCarHasPod = (isset($pods[$carPodId])?$pods[$carPodId]:false);
-        if($isCarHasPod)
+        // If the Car belongs to a Pod, reduce the frequency by multiplying it by the dirty pod factor.
+        $carBelongsToPod = (isset($pods[$carPodId])?$pods[$carPodId]:false);
+        if($carBelongsToPod)
             $carStdCleanFreq = $carStdCleanFreq * $carDirtyPod;
         
+        // Each Car belongs to a Car Class. Increase or decrease the frequency by multiplying by the Class’s factor.
         $isCarHasClassFactor = (isset($classes[$carClassId])?$classes[$carClassId]:1.0);
         $carStdCleanFreq = $carStdCleanFreq * $isCarHasClassFactor;
         
+        // The frequency should never exceed the maximum or fall below the minimum.
+        if($carStdCleanFreq <= $carMinCleanFreq)
+            $carStdCleanFreq = $carMinCleanFreq;
+            
+        if($carStdCleanFreq >= $carMaxCleanFreq)
+            $carStdCleanFreq = $carMaxCleanFreq;
+        
+        // Round calculated frequency to the nearest whole number of days.
+        $carStdCleanFreq = round($carStdCleanFreq);
+        
+        // Comparing the frequency to the number of days to determine the next Clean
         $nextClean = $carStdCleanFreq - $carLastCleaned;
         
-        if($nextClean > 0 && $carStdCleanFreq > $carMinCleanFreq && $carStdCleanFreq < $carMaxCleanFreq)
-            return round($nextClean);
+        if($nextClean > 0)
+            return $nextClean;
         else
           return 0;
             

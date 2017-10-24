@@ -1,204 +1,99 @@
 <?php
+// Including CleaningAlgorithm
 include 'CleaningAlgorithm.php';
+
+/*
+ * Class CleaningAlgorithmTest
+ * Tests the CleaningAlgorithm with multiple test cases
+ */
 class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
 {
-    // Tests for clean which doesn't fall today
-    public function testNotTodayLastCleanGreaterThanStdCleanWithPods()
+    /*
+     * Test Case for car clean without Pods and with Classes Factor
+     * This Test for not Today Assertion Should Pass
+     */
+    public function testForNotTodayWithOutPodsAndWithClassesFactor()
     {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>true];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
+        $car = array('id' => 8, 'pod_id' => 12, 'class_id' => 1, 'last_clean' => 9);
+        $pods = array(11 => true, 12 => false);
+        $classes = array(1 => 0.7, 2 => 1.0, 3 => 1.5);
+        $settings = array(
+                        'dirty_pod' => 0.9,
+                        'min_freq' => 7,
+                        'std_freq' => 14,
+                        'max_freq' => 28,
+                        );
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
         
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanGreaterThanStdCleanWithPodsFalse()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>false];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanGreaterThanStdCleanWithNullPods()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanGreaterThanStdCleanWithNullClasses()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>true];
-        $classes = [];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
+        $this->assertGreaterThan(0, $result, "Test Case for car clean without Pods and with Classes Factor Failed 0 expecting but got ".$result);
     }
     
-    public function testNotTodayLastCleanLessThanStdCleanWithPods()
+    /*
+     * Test Case for car clean with Pods and with Classes Factor
+     * This Test for Today Assertion Should Pass
+     */
+    public function testForTodayWithPodsAndWithClassesFactor()
     {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>true];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
+        $car = array('id' => 8, 'pod_id' => 12, 'class_id' => 1, 'last_clean' => 9);
+        $pods = array(11 => true, 12 => true);
+        $classes = array(1 => 0.7, 2 => 1.0, 3 => 1.5);
+        $settings = array(
+                        'dirty_pod' => 0.9,
+                        'min_freq' => 7,
+                        'std_freq' => 14,
+                        'max_freq' => 28,
+                        );
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
         
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanLessThanStdCleanWithPodsFalse()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>false];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanLessThanStdCleanWithNullPods()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
-    }
-    public function testNotTodayLastCleanLessThanStdCleanWithNullClasses()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>true];
-        $classes = [];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertGreaterThan(0, $result);
+        $this->assertEquals(0, $result, "Test Case for car clean with Pods and with Classes Factor Failed 0 expecting but got ".$result);
     }
     
-    
-    // Tests for clean which fall today
-    public function testForTodayLastCleanGreaterThanStdCleanWithPods()
+    /*
+     * Test Case for car clean without Pods and with Classes Factor
+     * This Test for Today Assertion Should Fail
+     */
+    public function testForTodayWithOutPodsAndWithClassesFactor()
     {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>true];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
+        $car = array('id' => 8, 'pod_id' => 12, 'class_id' => 1, 'last_clean' => 9);
+        $pods = array(11 => true, 12 => false);
+        $classes = array(1 => 0.7, 2 => 1.0, 3 => 1.5);
+        $settings = array(
+                        'dirty_pod' => 0.9,
+                        'min_freq' => 7,
+                        'std_freq' => 14,
+                        'max_freq' => 28,
+                        );
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
         
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanGreaterThanStdCleanWithPodsFalse()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>false];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanGreaterThanStdCleanWithNullPods()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanGreaterThanStdCleanWithNullClasses()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 25];
-        $pods = [2=>true];
-        $classes = [];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
+        $this->assertEquals(0, $result, "Test Case for car clean without Pods and with Classes Factor Failed 0 expecting but got ".$result);
     }
     
-    public function testForTodayLastCleanLessThanStdCleanWithPods()
+    /*
+     * Test Case for car clean with Pods and with Classes Factor
+     * This Test for not Today Assertion Should Fail
+     */
+    public function testForNotTodayWithPodsAndWithClassesFactor()
     {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>true];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
+        $car = array('id' => 8, 'pod_id' => 12, 'class_id' => 1, 'last_clean' => 9);
+        $pods = array(11 => true, 12 => true);
+        $classes = array(1 => 0.7, 2 => 1.0, 3 => 1.5);
+        $settings = array(
+                        'dirty_pod' => 0.9,
+                        'min_freq' => 7,
+                        'std_freq' => 14,
+                        'max_freq' => 28,
+                        );
         $getObj = new CleaningAlgorithm;
 
         $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
         
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanLessThanStdCleanWithPodsFalse()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>false];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanLessThanStdCleanWithNullPods()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [];
-        $classes = [3=>0.2];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
-    }
-    public function testForTodayLastCleanLessThanStdCleanWithNullClasses()
-    {
-        $car = ['id' => 1, 'pod_id' => 2, 'class_id' => 3, 'last_clean' => 20];
-        $pods = [2=>true];
-        $classes = [];
-        $settings = ['dirty_pod' => 1.4, 'min_freq' => 10, 'std_freq' => 24, 'max_freq' => 30];
-        $getObj = new CleaningAlgorithm;
-
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        
-        $this->assertEquals(0, $result);
+        $this->assertGreaterThan(0, $result, "Test Case for car clean with Pods and with Classes Factor Failed 0 expecting but got ".$result);
     }
 }
 ?>
