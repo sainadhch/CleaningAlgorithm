@@ -27,17 +27,17 @@ class CleaningAlgorithm
         $carStdCleanFreq = $settings['std_freq'];
         $carMaxCleanFreq = $settings['max_freq'];
         
-        $isCarHasClassFactor = (isset($classes[$carClassId])?$classes[$carClassId]:1.0);
-        $carLastCleaned = $carLastCleaned * $isCarHasClassFactor;
-
         $isCarHasPod = (isset($pods[$carPodId])?$pods[$carPodId]:false);
         if($isCarHasPod)
-            $carLastCleaned = $carLastCleaned * $carDirtyPod;
+            $carStdCleanFreq = $carStdCleanFreq * $carDirtyPod;
         
-        $nextClean = round($carStdCleanFreq - $carLastCleaned);
+        $isCarHasClassFactor = (isset($classes[$carClassId])?$classes[$carClassId]:1.0);
+        $carStdCleanFreq = $carStdCleanFreq * $isCarHasClassFactor;
         
-        if($nextClean > 0 && $carLastCleaned > $carMinCleanFreq && $carLastCleaned < $carMaxCleanFreq)
-            return $nextClean;
+        $nextClean = $carStdCleanFreq - $carLastCleaned;
+        
+        if($nextClean > 0 && $carStdCleanFreq > $carMinCleanFreq && $carStdCleanFreq < $carMaxCleanFreq)
+            return round($nextClean);
         else
           return 0;
             
