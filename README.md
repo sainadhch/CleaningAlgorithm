@@ -15,7 +15,7 @@
     
 # Code Usage
 
-    1. Copy 'CleaningAlgorithm.php' to server or localhost.
+    1. Clone or download files and upload 'CleaningAlgorithm.php' to server or localhost.
     2. Where required use autoload or include 'CleaningAlgorithm.php'.
     3. Create Instance for the class "CleaningAlgorithm".
     4. Now "calculateNextClean" method can be called.
@@ -34,24 +34,7 @@
             * ‘std_freq’ the standard numbers of days between cleans
             * ‘max_freq’ the maximum numbers of days between cleans
  
- # Example
- 
-    ```
-        $pods = array(11 => true, 12 => false);
-        $classes = array(1 => 0.7, 2 => 1.0, 3 => 1.5);
-        $settings = array(
-                            'dirty_pod' => 0.9,
-                            'min_freq' => 7,
-                            'std_freq' => 14,
-                            'max_freq' => 20,
-                            );
-        $car = array('id' => 7, 'pod_id' => 11, 'class_id' => 3, 'last_clean' => 5);
-        $getObj = new CleaningAlgorithm;
-        $result = $getObj->calculateNextClean($car, $pods, $classes, $settings);
-        echo $result;
-    ```
-    
-# Example
+# Code Usage Example
     
     ```
     $pods = array(11 => true, 12 => false);
