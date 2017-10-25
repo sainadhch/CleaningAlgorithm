@@ -36,15 +36,15 @@ class CleaningAlgorithm
         $isCarHasClassFactor = (isset($classes[$carClassId])?$classes[$carClassId]:1.0);
         $carStdCleanFreq = $carStdCleanFreq * $isCarHasClassFactor;
         
+        // Round calculated frequency to the nearest whole number of days.
+        $carStdCleanFreq = round($carStdCleanFreq);
+        
         // The frequency should never exceed the maximum or fall below the minimum.
         if($carStdCleanFreq <= $carMinCleanFreq)
             $carStdCleanFreq = $carMinCleanFreq;
             
         if($carStdCleanFreq >= $carMaxCleanFreq)
             $carStdCleanFreq = $carMaxCleanFreq;
-        
-        // Round calculated frequency to the nearest whole number of days.
-        $carStdCleanFreq = round($carStdCleanFreq);
         
         // Comparing the frequency to the number of days to determine the next Clean
         $nextClean = $carStdCleanFreq - $carLastCleaned;
