@@ -5,6 +5,7 @@ include 'CleaningAlgorithm.php';
 /*
  * Class CleaningAlgorithmTest
  * Tests the CleaningAlgorithm with multiple test cases
+ * @Author Sainadh Ch <chandu.sainath@gmail.com>
  */
 class CleaningAlgorithmTest extends \PHPUnit_Framework_TestCase
 {
