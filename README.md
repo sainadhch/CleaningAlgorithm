@@ -20,15 +20,15 @@
     3. Create Instance for the class "CleaningAlgorithm".
     4. Now "calculateNextClean" method can be called.
     5. The function parameters are defined as follows:
-        * $car a 1­D array with the following keys mapped to intvalues
+        * $car a 1­D array with the following keys mapped to int values
             * ‘id’ the Car’s ID
             * ‘pod_id’ the ID of the Car’s Pod ­ a key into $pods
             * ‘class_id’ the ID of the Car’s Class ­ a key into $classes
             * ‘last_clean’ the number of days since the car was last cleaned
 
         * $pods a 1­D array of Pod IDs (ints) mapped to boolean values
-        * $classes a 1­D array of Class IDs (ints) mapped to doublevalues
-        * $settings a 1­D array with the following keys mapped to int/ doublevalues
+        * $classes a 1­D array of Class IDs (ints) mapped to double values
+        * $settings a 1­D array with the following keys mapped to int/ double values
             * ‘dirty_pod’ the “dirty pod” factor (double)
             * ‘min_freq’ the minimum numbers of days between cleans
             * ‘std_freq’ the standard numbers of days between cleans
@@ -56,7 +56,7 @@
     factor of 1.5. Our calculated frequency is 14 * 0.9 * 1.5 = 18.9. This rounds to 19 days between
     cleans. The last clean was 5 days ago, so the next clean is due in 19 ­ 5 days, ie. 14 days.
     
-    Online Execution Link: https://www.jdoodle.com/a/beK
+    Online Execution Link: [a link](https://www.jdoodle.com/a/beK)
 
 # PHPUnit Testing
    PHPUnit testing file 'CleaningAlgorithmTest.php'
