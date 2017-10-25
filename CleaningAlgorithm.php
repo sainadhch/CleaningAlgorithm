@@ -39,10 +39,11 @@ class CleaningAlgorithm
         // Round calculated frequency to the nearest whole number of days.
         $carStdCleanFreq = round($carStdCleanFreq);
         
-        // The frequency should never exceed the maximum or fall below the minimum.
+        // The frequency should never fall below the minimum frequency.
         if($carStdCleanFreq <= $carMinCleanFreq)
             $carStdCleanFreq = $carMinCleanFreq;
             
+        // The frequency should never exceed the maximum frequency.
         if($carStdCleanFreq >= $carMaxCleanFreq)
             $carStdCleanFreq = $carMaxCleanFreq;
         
